@@ -30,8 +30,19 @@ pipeline {
     }
 
     stage('Deploy') {
-      steps {
-        sh './mvnw verify'
+      parallel {
+        stage('Deploy') {
+          steps {
+            sh './mvnw verify'
+          }
+        }
+
+        stage('Run Integration and Load Tests') {
+          steps {
+            sh './mvnw verify'
+          }
+        }
+
       }
     }
 
