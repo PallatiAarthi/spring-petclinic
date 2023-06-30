@@ -35,19 +35,8 @@ pipeline {
     }
 
     stage('Deploy') {
-      parallel {
-        stage('Deploy') {
-          steps {
-            sh './mvnw verify'
-          }
-        }
-
-        stage('Run Integration and Load Tests') {
-          steps {
-            sh './mvnw verify'
-          }
-        }
-
+      steps {
+        sh './mvnw spring-boot:run </dev/null &>/dev/null &'
       }
     }
 
