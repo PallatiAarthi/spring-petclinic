@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    node {
-      label 'test'
-    }
-
-  }
+  agent any
   stages {
     stage('Compile') {
       steps {
@@ -42,7 +37,7 @@ pipeline {
           }
         }
 
-        stage(' Integration and Performance Test') {
+        stage('Integration and Performance Test') {
           agent {
             node {
               label 'test'
