@@ -42,7 +42,7 @@ pipeline {
           }
         }
 
-        stage('./mvnw spring-boot:run </dev/null &>/dev/null &') {
+        stage(' Integration and Performance Test') {
           agent {
             node {
               label 'test'
