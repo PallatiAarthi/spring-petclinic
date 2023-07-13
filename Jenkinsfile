@@ -30,8 +30,25 @@ pipeline {
     }
 
     stage('Deploy') {
-      steps {
-        sh './mvnw spring-boot:run </dev/null &>/dev/null &'
+      parallel {
+        stage('Deploy') {
+          steps {
+            sh './mvnw spring-boot:run </dev/null &>/dev/null &'
+          }
+        }
+
+        stage('./mvnw spring-boot:run </dev/null &>/dev/null &') {
+          agent {
+            node {
+              label 'test'
+            }
+
+          }
+          steps {
+            sh './mvnw verify'
+          }
+        }
+
       }
     }
 
